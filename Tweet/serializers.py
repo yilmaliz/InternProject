@@ -4,5 +4,6 @@ from .models import Tweet
 class TweetSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tweet
-        fields = ['content',]
+        #fields = ['id','content',]
+        fields = '__all__'
 
