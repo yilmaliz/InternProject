@@ -118,6 +118,7 @@ class TweetMixin(object):
         obj.owner =self.request.user
 
 
+
 class GenericTweetList(generics.ListCreateAPIView):
     queryset = Tweet.objects.all()
     serializer_class = TweetSerializer
