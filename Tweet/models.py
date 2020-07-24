@@ -1,7 +1,4 @@
 from django.db import models
-from pygments import highlight
-from pygments.formatters.html import HtmlFormatter
-from pygments.lexers import get_lexer_by_name
 
 
 class Tweet(models.Model):

@@ -3,6 +3,7 @@ from django.urls import path
 from .views import tweet_list,tweet_detail
 from Tweet import views
 
+
 urlpatterns = [
     path('tweet/', tweet_list),
     path('tweet/<int:pk>/',tweet_detail),

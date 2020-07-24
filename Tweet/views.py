@@ -121,6 +121,7 @@ class TweetMixin(object):
 class GenericTweetList(generics.ListCreateAPIView):
     queryset = Tweet.objects.all()
     serializer_class = TweetSerializer
+
 class GenericTweetDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Tweet.objects.all()
     serializer_class = TweetSerializer
