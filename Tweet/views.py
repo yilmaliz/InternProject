@@ -9,7 +9,7 @@ from rest_framework import mixins
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication, TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import viewsets
-from django.shortcuts import get_object_or_404
+
 
 class TweetViewSet(viewsets.GenericViewSet,mixins.ListModelMixin,mixins.CreateModelMixin,
                    mixins.UpdateModelMixin,mixins.DestroyModelMixin,mixins.RetrieveModelMixin):

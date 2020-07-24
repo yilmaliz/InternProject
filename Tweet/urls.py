@@ -4,7 +4,6 @@ from .views import  TweetViewSet
 #tweet_list,tweet_detail,TweetAPIView,TweetDetails,GenericAPIViewDetail,GenericAPIViewList,
 from rest_framework.routers import DefaultRouter
 
-
 router = DefaultRouter()
 router.register('tweet', TweetViewSet, basename='tweet')
 
