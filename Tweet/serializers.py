@@ -31,7 +31,6 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
     comments = SerializerComments(many=True)
 
-
     class Meta:
         model = User
         fields = ('url','id','username','email','tweets','comments')
