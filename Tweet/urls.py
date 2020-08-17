@@ -1,21 +1,29 @@
-
-from django.urls import path,include
-from .views import  TweetViewSet
-#tweet_list,tweet_detail,TweetAPIView,TweetDetails,GenericAPIViewDetail,GenericAPIViewList,
+from django.conf.urls import url, include
 from rest_framework.routers import DefaultRouter
+from django.urls import path
+#from .views import tweet_list, tweet_detail
+from Tweet import views
+
 
 router = DefaultRouter()
-router.register('tweet', TweetViewSet, basename='tweet')
+router.register(r'tweet', views.TweetViewSet)
+router.register(r'user', views.UserViewSet)
+router.register(r'comment', views.CommentViewSet)
 
 urlpatterns = [
-    path('viewset/',include(router.urls)),
-    path('viewset/<int:pk>/',include(router.urls)),
+    # path('tweet/', tweet_list),
+    # path('tweet/<int:pk>/',tweet_detail),
+    #
+    # path('api/tweet',views.TweetList.as_view()),
+    # path('api/tweet/<int:pk>',views.TweetDetail.as_view()),
+    #
+    # path('mixin/tweet',views.MixinTweetList.as_view()),
+    # path('mixin/tweet/<int:pk>',views.MixinTweetDetail.as_view()),
+    #
+    # path('generic/tweet',views.GenericTweetList.as_view()),
+    # path('generic/tweet/<int:pk>',views.GenericTweetDetail.as_view()),
+
+    url(r'^', include(router.urls)),
 
 
-    # #path('tweet/', tweet_list),
-    # path('tweet/', TweetAPIView.as_view()),
-    # #path('detail/<int:pk>/',tweet_detail)
-    # path('detail/<int:id>/',TweetDetails.as_view()),
-    # path('generic/tweet/', GenericAPIViewList.as_view()),
-    # path('generic/tweet/<int:id>/', GenericAPIViewDetail.as_view()),
 ]
