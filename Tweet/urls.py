@@ -9,6 +9,7 @@ router = DefaultRouter()
 router.register(r'tweet', views.TweetViewSet)
 router.register(r'user', views.UserViewSet)
 router.register(r'comment', views.CommentViewSet)
+router.register(r'like', views.LikeViewSet)
 
 urlpatterns = [
     # path('tweet/', tweet_list),

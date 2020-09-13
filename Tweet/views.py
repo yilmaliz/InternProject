@@ -1,9 +1,9 @@
 from django.contrib.auth.models import User
 
 
-from .models import Tweet, Comment
+from .models import Tweet, Comment, Like
 from .permissions import IsOwnerOrReadOnly
-from .serializers import TweetSerializer, UserSerializer, CommentSerializer
+from .serializers import TweetSerializer, UserSerializer, CommentSerializer, LikeSerializer
 from rest_framework import  viewsets, permissions
 
 
@@ -15,8 +15,6 @@ from rest_framework import  viewsets, permissions
 #
 #         return Response(serializer.data)
 
-#
-#
 #     def post(self,request,format=None):
 #         serializer = TweetSerializer(data=request.data)
 #         if serializer.is_valid():
@@ -41,8 +39,9 @@ from rest_framework import  viewsets, permissions
 #             serializer.save()
 #             return Response(serializer.data)
 #         return Response(status=status.HTTP_404_NOT_FOUND)
-#
-#
+
+
+
 # @api_view(['GET','POST'])
 # def tweet_list(request):
 #     if request.method == 'GET':
@@ -73,8 +72,9 @@ from rest_framework import  viewsets, permissions
 #     elif request.method == 'DELETE':
 #         tweet.delete()
 #         return Response(status=status.HTTP_204_NO_CONTENT)
-#
-#
+
+
+
 # class MixinTweetList(mixins.ListModelMixin,mixins.CreateModelMixin,generics.GenericAPIView):
 #     queryset = Tweet.objects.all()
 #     serializer_class = TweetSerializer
@@ -102,8 +102,9 @@ from rest_framework import  viewsets, permissions
 #     serializer_class = TweetSerializer
 #     def pre_save(self,obj):
 #         obj.owner =self.request.user
-#
-#
+
+
+
 # class GenericTweetList(generics.ListCreateAPIView):
 #
 #     authentication_classes = [SessionAuthentication]
@@ -116,7 +117,6 @@ from rest_framework import  viewsets, permissions
 #
 #     queryset = Tweet.objects.all()
 #     serializer_class = TweetSerializer
-
 class TweetViewSet(viewsets.ModelViewSet):
 
     queryset = Tweet.objects.all()
@@ -139,8 +139,18 @@ class CommentViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 
-class UserViewSet(viewsets.ReadOnlyModelViewSet):
+class LikeViewSet(viewsets.ModelViewSet):
 
+    queryset = Like.objects.all()
+    serializer_class = LikeSerializer
+    permission_classes = (
+        permissions.IsAuthenticatedOrReadOnly,
+        IsOwnerOrReadOnly, )
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
+class UserViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
